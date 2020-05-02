@@ -1,0 +1,27 @@
+ext {
+    versions = [
+            compileSdkVersion  : 29,
+            buildToolsVersion  : "29.0.3",
+            minSdkVersion      : 21,
+            targetSdkVersion   : 29,
+            versionCode        : 1,
+            versionName        : "1.0.0",
+            sourceCompatibility: JavaVersion.VERSION_1_8,
+            targetCompatibility: JavaVersion.VERSION_1_8
+    ]
+
+    dependencies = [
+            "appcompat"                        : 'androidx.appcompat:appcompat:1.1.0',
+            'recyclerview'                     : 'androidx.recyclerview:recyclerview:1.0.0',
+            'autodisposeandroid'               : 'com.uber.autodispose:autodispose-android:1.4.0',
+            'autodisposearchcomponents'        : 'com.uber.autodispose:autodispose-android-archcomponents:1.4.0',
+            "blankj_utilcode"                  : "com.blankj:utilcode:1.28.0",
+            "fragmentation"                    : "me.xuexuan:fragmentationx-core:1.0.5",
+            "fragmentation_swipeback"          : "me.xuexuan:fragmentationx-swipeback:1.0.5",
+            "lifecycle_extensions"             : "androidx.lifecycle:lifecycle-extensions:2.2.0",
+            "viewpager2"                       : 'androidx.viewpager2:viewpager2:1.0.0',
+            "junit"                            : "junit:junit:4.12",
+            "test_runner"                      : "androidx.test:runner:1.2.0",
+            "test_espresso_core"               : "androidx.test.espresso:espresso-core:3.2.0",
+    ]
+}

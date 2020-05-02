@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.example.demo2.Demo2ViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击这个Button会finish()"
+            android:textAllCaps="false"
+           app:onClick="@{viewModel.onClickBtn1}" />
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击这个Button会onBackPressed()"
+            android:textAllCaps="false"
+           app:onClick="@{viewModel.onClickBtn2}" />
+
+        <EditText
+            android:id="@+id/edt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:addTextChangedListener="@{viewModel.onEditTextChangeListener}"
+            android:hint="输入文字，会触发addTextChangeListener"
+            android:text="@={viewModel.edtContent1}"
+            android:textColor="#333333" />
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击这个Button会重置EditText的内容"
+            android:textAllCaps="false"
+           app:onClick="@{viewModel.onClickBtn3}" />
+
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击这个Button会输出EditText的内容"
+            android:textAllCaps="false"
+           app:onClick="@{viewModel.onClickBtn4}" />
+
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="传递信息给Activity"
+            android:textAllCaps="false"
+           app:onClick="@{viewModel.onClickBtn5}" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:checked="@={viewModel.checkBoxValue}"
+            android:gravity="center"
+            app:onClick="@{viewModel.onClickCheckBox}"
+            android:text="@={viewModel.checkBoxText}" />
+
+        <RadioButton
+            android:id="@+id/radioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:checked="@={viewModel.radioBtnValue}"
+            android:gravity="center"
+            android:text="单选按钮"
+            android:visibility="@{checkBox.checked?View.VISIBLE:View.GONE}" />
+
+    </LinearLayout>
+</layout>

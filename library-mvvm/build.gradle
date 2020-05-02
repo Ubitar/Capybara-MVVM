@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: "kotlin-android"
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    dataBinding {
+        enabled true
+    }
+    def versions = rootProject.ext.versions
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
+    buildToolsVersion rootProject.ext.versions.buildToolsVersion
+    defaultConfig {
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility versions.sourceCompatibility
+        targetCompatibility versions.targetCompatibility
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+dependencies {
+    def dependencies = rootProject.ext.dependencies
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation dependencies.appcompat
+    implementation dependencies.recyclerview
+    implementation dependencies.blankj_utilcode
+    implementation dependencies.fragmentation
+    implementation dependencies.fragmentation_swipeback
+    implementation dependencies.lifecycle_extensions
+    implementation dependencies.viewpager2
+    testImplementation dependencies.junit
+    androidTestImplementation dependencies.test_runner
+    androidTestImplementation dependencies.test_espresso_core
+
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnDemo1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="最简单的示例 demo1"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnDemo2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="复杂点的   demo2"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnDemo3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Model的使用   demo3"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnDemo4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="fragmentation相关   demo4"
+        android:textAllCaps="false" />
+
+</LinearLayout>
