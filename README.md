@@ -10,7 +10,6 @@ Capybara 使用`databinding + fragmentation`搭建，仅包含`Activity`及`Frag
 - ###### 前言<br/>
 - ###### 结构简述<br/>
 - ###### 食用方法<br/>
-- ###### 架构描述<br/>
 - ###### 常见问题<br/><br/>
 
 ## 前言
