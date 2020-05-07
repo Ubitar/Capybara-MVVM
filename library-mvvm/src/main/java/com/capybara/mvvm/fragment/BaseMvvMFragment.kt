@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.capybara.mvvm.IView
 import com.capybara.mvvm.vm.base.BaseFragmentViewModel
+import me.yokeyword.fragmentation.ISupportActivity
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseMvvMFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> :
@@ -56,7 +57,7 @@ abstract class BaseMvvMFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<
      */
     override fun onBindObservable() {
         viewModel.actions.onBackPressedSupportAction.observe(viewLifecycleOwner, Observer {
-            onBackPressedSupport()
+            (activity as ISupportActivity).onBackPressedSupport()
         })
         viewModel.actions.postAction.observe(viewLifecycleOwner, Observer {
             post(it)

@@ -41,11 +41,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> 
         viewModel.initEvent()
     }
 
-    override fun onBackPressedSupport(): Boolean {
-        (activity as BaseSupportActivity).onBackPressedSupport()
-        return true
-    }
-
     override fun onSupportVisible() {
         super.onSupportVisible()
         if (!isFirstVisible)
