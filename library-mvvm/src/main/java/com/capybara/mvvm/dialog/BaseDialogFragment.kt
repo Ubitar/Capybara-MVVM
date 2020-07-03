@@ -3,17 +3,15 @@ package com.capybara.mvvm.dialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.Gravity
-import android.view.KeyEvent
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
+import android.widget.LinearLayout
 import androidx.databinding.ViewDataBinding
 import com.capybara.mvvm.vm.base.BaseDialogViewModel
 
 abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<*>> :
     BaseMvvMDialogFragment<V, VM>() {
 
-    private var onDismissListener: (() -> Unit)? = null
+    private var onCanceledListener: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,18 +22,37 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
         val dialog = super.onCreateDialog(savedInstanceState)
         if (!isDimAmountEnable())
             dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        dialog.window?.setDimAmount(getDimAmount())
         dialog.setOnKeyListener { dialogInterface, i, keyEvent ->
-            return@setOnKeyListener !getBackEnable() && i == KeyEvent.KEYCODE_BACK
+            if (getBackEnable() && i == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_DOWN) {
+                onCanceledListener?.invoke()
+            }
+            return@setOnKeyListener false
         }
         val dialogWindow = dialog.window
         dialogWindow?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialogWindow?.setGravity(getGravity())
         dialogWindow?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT
         )
         (dialogWindow?.decorView as ViewGroup).getChildAt(0).setOnClickListener {
-            if(getOutsideEnable()) dismiss()
+            if (getOutsideEnable()) {
+                onCanceledListener?.invoke()
+                dismissAllowingStateLoss()
+            }
+        }
+        getRootView(dialog.window?.decorView as ViewGroup).let {
+            it.isClickable = true
+            val layoutParams = (it.parent as ViewGroup).layoutParams
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            (it.parent as ViewGroup).layoutParams = layoutParams
+            ((it.parent as ViewGroup).parent as LinearLayout).gravity = getGravity()
+            ((it.parent as ViewGroup).parent as View).setOnClickListener {
+                if (getOutsideEnable()) {
+                    onCanceledListener?.invoke()
+                    dismissAllowingStateLoss()
+                }
+            }
         }
         return dialog
     }
@@ -48,15 +65,13 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
         viewModel.initData()
     }
 
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        onDismissListener?.invoke()
+    fun setOnCanceledListener(listener: (() -> Unit)?): BaseDialogFragment<*, *> {
+        this.onCanceledListener = listener
+        return this
     }
 
-    fun setOnDismissListener(listener: (() -> Unit)?): BaseDialogFragment<*, *> {
-        this.onDismissListener = listener
-        return this
+    private fun getRootView(decorView: ViewGroup): View {
+        return (decorView.findViewById(android.R.id.content) as ViewGroup).getChildAt(0)
     }
 
     open fun getGravity(): Int {

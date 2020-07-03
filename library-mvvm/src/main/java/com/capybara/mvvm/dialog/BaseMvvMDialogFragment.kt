@@ -82,9 +82,8 @@ abstract class BaseMvvMDialogFragment<V : ViewDataBinding, VM : BaseDialogViewMo
         savedInstanceState: Bundle?
     ): T {
         val decorView = dialog?.window?.decorView as ViewGroup
-        val parent1 = decorView.getChildAt(decorView.childCount - 1) as ViewGroup
-        val parent2 = parent1.getChildAt(parent1.childCount - 1) as ViewGroup
-        return DataBindingUtil.bind(parent2.getChildAt(0))!!
+        val contentView = decorView.findViewById(android.R.id.content) as ViewGroup
+        return DataBindingUtil.bind(contentView.getChildAt(0))!!
     }
 
     /**
