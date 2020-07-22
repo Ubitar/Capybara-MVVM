@@ -3,6 +3,7 @@ package com.example.example.demo1
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.capybara.mvvm.action.ActivityActions
 import com.capybara.mvvm.model.BaseModel
 import com.capybara.mvvm.vm.base.BaseActivityViewModel
 
@@ -12,6 +13,9 @@ class Demo1ViewModel(application: Application) : BaseActivityViewModel<BaseModel
 
     /** 这个是 MVVM 中的  Model层，如没有网络或数据库需求，传NUll即可 */
     override fun getModel(): Class<BaseModel>? = null
+
+    /** 创建自己的业务的Demo1Actions ，并转达给父类 ，若无需Actions，传NUll即可*/
+    override fun onCreateActions(): ActivityActions? =null
 
     //用于初始化RecyclerView adapter的事件监听
     override fun initEvent() {

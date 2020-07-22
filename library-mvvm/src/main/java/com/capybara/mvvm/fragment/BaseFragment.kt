@@ -34,6 +34,15 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> 
         return attachToSwipeBack(view!!)
     }
 
+    override fun onCreatedViewModel() {
+        super.onCreatedViewModel()
+        initDaggerInject()
+    }
+
+    override fun onBeforeObservable() {
+        super.onBeforeObservable()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initViewModelParams()
@@ -88,6 +97,11 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> 
 
     /** 初始化页面参数  */
     open fun initParams() {
+
+    }
+
+    /** Dagger注入 */
+    open fun initDaggerInject(){
 
     }
 

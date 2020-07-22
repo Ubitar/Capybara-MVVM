@@ -10,15 +10,14 @@ import me.yokeyword.fragmentation.ISupportFragment
 abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
     BaseViewModel<M>(application) {
 
-    var actions = FragmentActions()
-        private set
+    private lateinit var baseActions: FragmentActions
 
     fun onBackPressedSupport() {
-        actions.onBackPressedSupportAction.call()
+        baseActions.onBackPressedSupportAction.call()
     }
 
     fun post(runnable: Runnable) {
-        actions.postAction.call(runnable)
+        baseActions.postAction.call(runnable)
     }
 
 
@@ -31,7 +30,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
      * @see .startForResult
      */
     fun setFragmentResult(resultCode: Int, bundle: Bundle) {
-        actions.setFragmentResultAction.call(
+        baseActions.setFragmentResultAction.call(
             FragmentActions.SetFragmentResultAction.SetFragmentResult(
                 resultCode,
                 bundle
@@ -45,7 +44,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
      * @see .start
      */
     fun putNewBundle(newBundle: Bundle) {
-        actions.putNewBundleAction.call(newBundle)
+        baseActions.putNewBundleAction.call(newBundle)
     }
 
     /**
@@ -55,7 +54,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
      * @param toFragment  目标Fragment
      */
     fun loadRootFragment(containerId: Int, toFragment: ISupportFragment) {
-        actions.loadRootFragmentAction.call(
+        baseActions.loadRootFragmentAction.call(
             FragmentActions.LoadRootFragmentAction.LoadRootFragment(
                 containerId,
                 toFragment
@@ -69,7 +68,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
         addToBackStack: Boolean,
         allowAnim: Boolean
     ) {
-        actions.loadRootFragmentAction.call(
+        baseActions.loadRootFragmentAction.call(
             FragmentActions.LoadRootFragmentAction.LoadRootFragment(
                 containerId,
                 toFragment,
@@ -80,11 +79,11 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
     }
 
     fun start(toFragment: ISupportFragment) {
-        actions.startAction.call(FragmentActions.StartAction.Start(toFragment))
+        baseActions.startAction.call(FragmentActions.StartAction.Start(toFragment))
     }
 
     fun start(toFragment: ISupportFragment, fromParentFragment: Boolean) {
-        actions.startAction.call(FragmentActions.StartAction.Start(toFragment, fromParentFragment))
+        baseActions.startAction.call(FragmentActions.StartAction.Start(toFragment, fromParentFragment))
     }
 
     /**
@@ -95,7 +94,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
         fromParentFragment: Boolean,
         @ISupportFragment.LaunchMode launchMode: Int
     ) {
-        actions.startAction.call(
+        baseActions.startAction.call(
             FragmentActions.StartAction.Start(
                 toFragment,
                 fromParentFragment,
@@ -108,7 +107,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
      * Launch an fragment for which you would like a result when it poped.
      */
     fun startForResult(toFragment: ISupportFragment, requestCode: Int) {
-        actions.startForResultAction.call(
+        baseActions.startForResultAction.call(
             FragmentActions.StartForResultAction.StartForResult(
                 toFragment,
                 requestCode
@@ -121,7 +120,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
      * Start the target Fragment and pop itself
      */
     fun startWithPop(toFragment: ISupportFragment) {
-        actions.startWithPopAction.call(toFragment)
+        baseActions.startWithPopAction.call(toFragment)
     }
 
     /**
@@ -133,7 +132,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
         targetFragmentClass: Class<*>,
         includeTargetFragment: Boolean
     ) {
-        actions.startWithPopToAction.call(
+        baseActions.startWithPopToAction.call(
             FragmentActions.StartWithPopToAction.StartWithPopTo(
                 toFragment,
                 targetFragmentClass,
@@ -143,7 +142,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
     }
 
     fun replaceFragmentAction(toFragment: ISupportFragment, addToBackStack: Boolean) {
-        actions.replaceFragmentAction.call(
+        baseActions.replaceFragmentAction.call(
             FragmentActions.ReplaceFragmentAction.ReplaceFragment(
                 toFragment,
                 addToBackStack
@@ -152,7 +151,7 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
     }
 
     fun pop() {
-        actions.popAction.call()
+        baseActions.popAction.call()
     }
 
     /**
@@ -166,11 +165,23 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
      * @param includeTargetFragment 是否包含该fragment
      */
     fun popTo(targetFragmentClass: Class<*>, includeTargetFragment: Boolean) {
-        actions.popToAction.call(
+        baseActions.popToAction.call(
             FragmentActions.PopToAction.PopTo(
                 targetFragmentClass,
                 includeTargetFragment
             )
         )
     }
+
+
+    fun getBaseActions(): FragmentActions {
+        return baseActions
+    }
+
+    fun injectBaseActions(actions: FragmentActions?) {
+        baseActions = actions?:FragmentActions()
+    }
+
+    /** 创建自己的Action，并继承FragmentActions */
+    abstract fun onCreateActions(): FragmentActions?
 }

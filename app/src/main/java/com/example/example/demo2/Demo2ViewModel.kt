@@ -5,6 +5,7 @@ import android.text.Editable
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.ToastUtils
+import com.capybara.mvvm.action.ActivityActions
 import com.capybara.mvvm.model.BaseModel
 import com.capybara.mvvm.vm.base.BaseActivityViewModel
 import com.example.example.demo2.action.Demo2Actions
@@ -22,6 +23,9 @@ class Demo2ViewModel(application: Application) : BaseActivityViewModel<BaseModel
 
     /** 这个是 MVVM 中的  Model层，如没有网络或数据库需求，传NUll即可 */
     override fun getModel(): Class<BaseModel>? = null
+
+    /** 创建自己的业务的Demo1Actions ，并转达给父类 ，若无需Actions，传NUll即可*/
+    override fun onCreateActions(): ActivityActions? =null
 
     fun onClickBtn1(view: View) {
         finish()

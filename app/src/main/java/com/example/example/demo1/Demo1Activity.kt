@@ -19,18 +19,33 @@ class Demo1Activity: BaseActivity<ActivityDemo1Binding, Demo1ViewModel>() {
      * 下方函数运行顺序（从上往下顺序运行）
      *
      *  initParams()
+     *  onCreatedViewModel()  /   initDaggerInject()
+     *  onBeforeObservable()
+     *  onBindObservable()
      *  initViewModelParams()
      *  initView()
-     *  onBindObservable()
      *  ViewModel.initEvent()
      *  ViewModel.initData()
      *
      */
-
     //用于接收并处理从上一个界面传递过来的数据
     override fun initParams() {
         super.initParams()
     }
+
+    override fun onCreatedViewModel() {
+        super.onCreatedViewModel()
+    }
+
+    //这里可以进行Dagger注入
+    override fun initDaggerInject() {
+        super.initDaggerInject()
+    }
+
+    override fun onBeforeObservable() {
+        super.onBeforeObservable()
+    }
+
 
     //如果有需要，可以通过这个函数把初始数据传到ViewModel
     override fun initViewModelParams() {

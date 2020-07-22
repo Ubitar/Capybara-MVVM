@@ -6,19 +6,30 @@ import com.capybara.mvvm.model.BaseModel
 
 abstract class BaseDialogViewModel<M : BaseModel>(application: Application) : BaseViewModel<M>(application) {
 
-    var actions = DialogActions()
-        private set
+    private lateinit var baseActions: DialogActions
 
     fun post(runnable: Runnable) {
-        actions.postAction.call(runnable)
+        baseActions.postAction.call(runnable)
     }
 
     fun dismiss() {
-        actions.dismissAction.call()
+        baseActions.dismissAction.call()
     }
 
     fun dismissAllowingStateLoss() {
-        actions.dismissAllowingStateLossAction.call()
+        baseActions.dismissAllowingStateLossAction.call()
     }
+
+
+    fun getBaseActions(): DialogActions {
+        return baseActions
+    }
+
+    fun injectBaseActions(actions: DialogActions?) {
+        baseActions = actions?:DialogActions()
+    }
+
+    /** 创建自己的Action，并继承DialogActions */
+    abstract fun onCreateActions(): DialogActions ?
 
 }

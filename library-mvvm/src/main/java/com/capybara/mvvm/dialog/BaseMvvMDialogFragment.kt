@@ -46,8 +46,26 @@ abstract class BaseMvvMDialogFragment<V : ViewDataBinding, VM : BaseDialogViewMo
         //让ViewModel监听Activity的生命周期
         viewModel.injectLifecycleOwner(this)
 
+        //创建ViewModel后
+        onCreatedViewModel()
+        viewModel.injectBaseActions(viewModel.onCreateActions())
+        // 注册内容监听前 */
+        onBeforeObservable()
         //Activity注册ViewModel数据内容监听器，用于ViewModel通知View层的操作
         onBindObservable()
+    }
+
+
+    /**
+     * 创建ViewModel后
+     */
+    override fun onCreatedViewModel() {
+    }
+
+    /**
+     * 在注册ViewModel与View的回调事件前
+     */
+    override fun onBeforeObservable() {
     }
 
     override fun onDestroyView() {
@@ -60,13 +78,13 @@ abstract class BaseMvvMDialogFragment<V : ViewDataBinding, VM : BaseDialogViewMo
      * 注册ViewModel数据监听器
      */
     override fun onBindObservable() {
-        viewModel.actions.postAction.observe(binding.lifecycleOwner!!, Observer {
+        viewModel.getBaseActions().postAction.observe(binding.lifecycleOwner!!, Observer {
             handler.post(it)
         })
-        viewModel.actions.dismissAction.observe(binding.lifecycleOwner!!, Observer {
+        viewModel.getBaseActions().dismissAction.observe(binding.lifecycleOwner!!, Observer {
             dismiss()
         })
-        viewModel.actions.dismissAllowingStateLossAction.observe(
+        viewModel.getBaseActions().dismissAllowingStateLossAction.observe(
             binding.lifecycleOwner!!,
             Observer {
                 dismissAllowingStateLoss()

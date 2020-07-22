@@ -57,6 +57,16 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
         return dialog
     }
 
+
+    override fun onCreatedViewModel() {
+        super.onCreatedViewModel()
+        initDaggerInject()
+    }
+
+    override fun onBeforeObservable() {
+        super.onBeforeObservable()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initViewModelParams()
@@ -100,6 +110,11 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
 
     /** 初始化页面参数  */
     open fun initParams() {
+
+    }
+
+    /** Dagger注入 */
+    open fun initDaggerInject(){
 
     }
 

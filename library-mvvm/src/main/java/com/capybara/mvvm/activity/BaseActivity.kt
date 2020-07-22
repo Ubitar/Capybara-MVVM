@@ -22,6 +22,15 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseActivityViewModel<*>> 
         viewModel.initData()
     }
 
+    override fun onCreatedViewModel() {
+        super.onCreatedViewModel()
+        initDaggerInject()
+    }
+
+    override fun onBeforeObservable() {
+        super.onBeforeObservable()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         ActivityManager.getManager().finishActivity(this)
@@ -48,6 +57,11 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseActivityViewModel<*>> 
 
     /** 初始化视图  */
     open fun initView() {
+
+    }
+
+    /** Dagger注入 */
+    open fun initDaggerInject(){
 
     }
 

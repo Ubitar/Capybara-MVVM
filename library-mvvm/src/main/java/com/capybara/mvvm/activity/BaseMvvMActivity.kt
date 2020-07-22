@@ -30,9 +30,25 @@ abstract class BaseMvvMActivity<V : ViewDataBinding, VM : BaseActivityViewModel<
 
         //让ViewModel监听Activity的生命周期
         viewModel.injectLifecycleOwner(this)
-
+        //创建ViewModel后
+        onCreatedViewModel()
+        viewModel.injectBaseActions(viewModel.onCreateActions())
+        // 注册内容监听前 */
+        onBeforeObservable()
         //Activity注册ViewModel数据内容监听器，用于ViewModel通知View层的操作
         onBindObservable()
+    }
+
+    /**
+     * 创建ViewModel后
+     */
+    override fun onCreatedViewModel() {
+    }
+
+    /**
+     * 在注册ViewModel与View的回调事件前
+     */
+    override fun onBeforeObservable() {
     }
 
     override fun onDestroy() {
@@ -44,35 +60,35 @@ abstract class BaseMvvMActivity<V : ViewDataBinding, VM : BaseActivityViewModel<
      * 注册ViewModel数据监听器
      */
     override fun onBindObservable() {
-        viewModel.actions.finishAction.observe(this, Observer {
+        viewModel.getBaseActions().finishAction.observe(this, Observer {
             finish()
         })
-        viewModel.actions.finishAfterTransitionAction.observe(this, Observer {
+        viewModel.getBaseActions().finishAfterTransitionAction.observe(this, Observer {
             ActivityCompat.finishAfterTransition(this)
         })
-        viewModel.actions.onBackPressedSupportAction.observe(this, Observer {
+        viewModel.getBaseActions().onBackPressedSupportAction.observe(this, Observer {
             onBackPressedSupport()
         })
-        viewModel.actions.setResultAction.observe(this, Observer {
+        viewModel.getBaseActions().setResultAction.observe(this, Observer {
             setResult(it.result, it.data)
         })
-        viewModel.actions.postAction.observe(this, Observer {
+        viewModel.getBaseActions().postAction.observe(this, Observer {
             post(it)
         })
-        viewModel.actions.loadRootFragmentAction.observe(this, Observer {
+        viewModel.getBaseActions().loadRootFragmentAction.observe(this, Observer {
             loadRootFragment(it.containerId, it.toFragment)
         })
-        viewModel.actions.startAction.observe(this, Observer {
+        viewModel.getBaseActions().startAction.observe(this, Observer {
             if (it.launchMode == null) start(it.toFragment)
             else start(it.toFragment, it.launchMode)
         })
-        viewModel.actions.startWithPopToAction.observe(this, Observer {
+        viewModel.getBaseActions().startWithPopToAction.observe(this, Observer {
             startWithPopTo(it.toFragment, it.targetFragmentClass, it.includeTargetFragment)
         })
-        viewModel.actions.popAction.observe(this, Observer {
+        viewModel.getBaseActions().popAction.observe(this, Observer {
             pop()
         })
-        viewModel.actions.popToAction.observe(this, Observer {
+        viewModel.getBaseActions().popToAction.observe(this, Observer {
             if (it.afterPopTransactionRunnable == null)
                 popTo(it.targetFragmentClass, it.includeTargetFragment)
             else if (it.popAnim == null)

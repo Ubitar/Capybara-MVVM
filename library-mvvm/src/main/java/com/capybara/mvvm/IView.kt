@@ -9,6 +9,16 @@ import androidx.lifecycle.ViewModel
 interface IView {
 
     /**
+     * 创建ViewModel后
+     */
+    fun onCreatedViewModel()
+
+    /**
+     * 在注册ViewModel与View的回调事件前
+     */
+    fun onBeforeObservable()
+
+    /**
      * 注册ViewModel于View的回调事件
      */
     fun onBindObservable()

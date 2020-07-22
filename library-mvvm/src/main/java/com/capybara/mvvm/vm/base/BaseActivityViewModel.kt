@@ -9,35 +9,34 @@ import me.yokeyword.fragmentation.ISupportFragment
 abstract class BaseActivityViewModel<M : BaseModel>(application: Application) :
     BaseViewModel<M>(application) {
 
-    var actions = ActivityActions()
-        private set
+    private lateinit var baseActions: ActivityActions
 
     fun finish() {
-        actions.finishAction.call()
+        baseActions.finishAction.call()
     }
 
     fun finishAfterTransition() {
-        actions.finishAfterTransitionAction.call()
+        baseActions.finishAfterTransitionAction.call()
     }
 
     fun onBackPressedSupport() {
-        actions.onBackPressedSupportAction.call()
+        baseActions.onBackPressedSupportAction.call()
     }
 
     fun setResult(resultCode: Int) {
-        actions.setResultAction.call(ActivityActions.SetResultAction.SetResult(resultCode))
+        baseActions.setResultAction.call(ActivityActions.SetResultAction.SetResult(resultCode))
     }
 
     fun setResult(resultCode: Int, data: Intent) {
-        actions.setResultAction.call(ActivityActions.SetResultAction.SetResult(resultCode, data))
+        baseActions.setResultAction.call(ActivityActions.SetResultAction.SetResult(resultCode, data))
     }
 
     fun post(runnable: Runnable) {
-        actions.postAction.call(runnable)
+        baseActions.postAction.call(runnable)
     }
 
     fun loadRootFragment(containerId: Int, toFragment: ISupportFragment) {
-        actions.loadRootFragmentAction.call(
+        baseActions.loadRootFragmentAction.call(
             ActivityActions.LoadRootFragmentAction.LoadRootFragment(
                 containerId,
                 toFragment
@@ -46,11 +45,11 @@ abstract class BaseActivityViewModel<M : BaseModel>(application: Application) :
     }
 
     fun start(toFragment: ISupportFragment) {
-        actions.startAction.call(ActivityActions.StartAction.Start(toFragment))
+        baseActions.startAction.call(ActivityActions.StartAction.Start(toFragment))
     }
 
     fun start(toFragment: ISupportFragment, @ISupportFragment.LaunchMode launchMode: Int) {
-        actions.startAction.call(ActivityActions.StartAction.Start(toFragment, false, launchMode))
+        baseActions.startAction.call(ActivityActions.StartAction.Start(toFragment, false, launchMode))
     }
 
     fun startWithPopTo(
@@ -58,7 +57,7 @@ abstract class BaseActivityViewModel<M : BaseModel>(application: Application) :
         targetFragmentClass: Class<*>,
         includeTargetFragment: Boolean
     ) {
-        actions.startWithPopToAction.call(
+        baseActions.startWithPopToAction.call(
             ActivityActions.StartWithPopToAction.StartWithPopTo(
                 toFragment,
                 targetFragmentClass,
@@ -68,11 +67,11 @@ abstract class BaseActivityViewModel<M : BaseModel>(application: Application) :
     }
 
     fun pop() {
-        actions.popAction.call()
+        baseActions.popAction.call()
     }
 
     fun popTo(targetFragmentClass: Class<*>, includeTargetFragment: Boolean) {
-        actions.popToAction.call(ActivityActions.PopToAction.PopTo(targetFragmentClass, includeTargetFragment))
+        baseActions.popToAction.call(ActivityActions.PopToAction.PopTo(targetFragmentClass, includeTargetFragment))
     }
 
     fun popTo(
@@ -80,7 +79,7 @@ abstract class BaseActivityViewModel<M : BaseModel>(application: Application) :
         includeTargetFragment: Boolean,
         afterPopTransactionRunnable: Runnable
     ) {
-        actions.popToAction.call(
+        baseActions.popToAction.call(
             ActivityActions.PopToAction.PopTo(
                 targetFragmentClass,
                 includeTargetFragment,
@@ -95,7 +94,7 @@ abstract class BaseActivityViewModel<M : BaseModel>(application: Application) :
         afterPopTransactionRunnable: Runnable,
         popAnim: Int
     ) {
-        actions.popToAction.call(
+        baseActions.popToAction.call(
             ActivityActions.PopToAction.PopTo(
                 targetFragmentClass,
                 includeTargetFragment,
@@ -104,4 +103,16 @@ abstract class BaseActivityViewModel<M : BaseModel>(application: Application) :
             )
         )
     }
+
+
+    fun getBaseActions(): ActivityActions {
+        return baseActions
+    }
+
+    internal fun injectBaseActions(actions: ActivityActions?) {
+        baseActions = actions ?: ActivityActions()
+    }
+
+    /** 创建自己的Action，并继承ActionActions */
+    abstract fun onCreateActions(): ActivityActions?
 }

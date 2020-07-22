@@ -1,6 +1,7 @@
 package com.capybara.mvvm.vm
 
 import android.app.Application
+import com.capybara.mvvm.action.DialogActions
 import com.capybara.mvvm.model.BaseModel
 import com.capybara.mvvm.vm.base.BaseDialogViewModel
 
@@ -10,4 +11,6 @@ class EmptyDialogViewModel(application: Application) :
     ) {
      override fun getModel(): Class<BaseModel>? =null
 
- }
+    override fun onCreateActions(): DialogActions? =null
+
+}
