@@ -27,7 +27,7 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
             if (getBackEnable() && i == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_DOWN) {
                 onCanceledListener?.invoke()
             }
-            return@setOnKeyListener false
+            return@setOnKeyListener i == KeyEvent.KEYCODE_BACK
         }
         val dialogWindow = dialog.window
         dialogWindow?.setBackgroundDrawableResource(android.R.color.transparent)
