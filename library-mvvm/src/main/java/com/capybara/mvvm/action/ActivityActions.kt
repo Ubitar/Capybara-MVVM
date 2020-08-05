@@ -3,7 +3,7 @@ package com.capybara.mvvm.action
 import android.content.Intent
 import me.yokeyword.fragmentation.ISupportFragment
 
-class ActivityActions {
+open class ActivityActions {
     val finishAction: FinishAction by lazy { FinishAction() }
     val finishAfterTransitionAction: FinishAfterTransitionAction by lazy { FinishAfterTransitionAction() }
     val onBackPressedSupportAction: OnBackPressedSupportAction by lazy { OnBackPressedSupportAction() }

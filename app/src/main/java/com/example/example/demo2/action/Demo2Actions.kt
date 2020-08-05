@@ -1,8 +1,9 @@
 package com.example.example.demo2.action
 
+import com.capybara.mvvm.action.ActivityActions
 import com.capybara.mvvm.action.SingleLiveAction
 
-class Demo2Actions {
+class Demo2Actions : ActivityActions() {
 
     val customAction: CustomAction by lazy { CustomAction() }
 
