@@ -20,13 +20,13 @@ class Demo2ViewModel(application: Application) : BaseActivityViewModel<BaseModel
     val radioBtnValue = MutableLiveData(false)
 
     //@Inject  如果是用了Dagger可以通过注入赋值
-    val actions2 = Demo2Actions()
+    val actions = Demo2Actions()
 
     /** 这个是 MVVM 中的  Model层，如没有网络或数据库需求，传NUll即可 */
     override fun getModel(): Class<BaseModel>? = null
 
     /** 创建自己的业务的Demo1Actions ，并转达给父类 ，若无需Actions，传NUll即可*/
-    override fun onCreateActions(): ActivityActions? =actions2
+    override fun onCreateActions(): ActivityActions? =actions
 
     fun onClickBtn1(view: View) {
         finish()
@@ -45,7 +45,7 @@ class Demo2ViewModel(application: Application) : BaseActivityViewModel<BaseModel
     }
 
     fun onClickBtn5(view: View) {
-        actions2.customAction.call(100)
+        actions.customAction.call(100)
     }
 
     fun onClickCheckBox(view: View) {

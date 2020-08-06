@@ -14,18 +14,6 @@ class Demo2Activity: BaseActivity<ActivityDemo2Binding, Demo2ViewModel>() {
 
     override fun getViewModelId(): Int =BR.viewModel
 
-
-    /**
-     * 下方函数运行顺序（从上往下顺序运行）
-     *
-     *  initParams()
-     *  initViewModelParams()
-     *  initView()
-     *  onBindObservable()
-     *  ViewModel.initEvent()
-     *  ViewModel.initData()
-     *
-     */
     override fun initParams() {
         super.initParams()
         //用于接收并处理从上一个界面传递过来的数据
@@ -39,7 +27,7 @@ class Demo2Activity: BaseActivity<ActivityDemo2Binding, Demo2ViewModel>() {
 
     override fun onBindObservable() {
         super.onBindObservable()
-        viewModel.actions2.customAction.observe(this, Observer {
+        viewModel.actions.customAction.observe(this, Observer {
             ToastUtils.showShort("Activity收到了来自ViewModel的信息 $it")
         })
     }
