@@ -2,8 +2,7 @@
 
 以下文章，我会把本架构称为 **Capybara**
 
-放下Github链接先[https://github.com/Ubitar/MVVMCapybara](https://github.com/Ubitar/MVVMCapybara)
-
+详细文章  https://www.jianshu.com/p/25fa3903c246
 
 Capybara 使用`databinding + fragmentation`搭建，仅包含`Activity`及`Fragment`等组件基础功能，
 可能有些人喜欢用 `navigation`，架构有分层，大家可以自己fork下来删减定制。
