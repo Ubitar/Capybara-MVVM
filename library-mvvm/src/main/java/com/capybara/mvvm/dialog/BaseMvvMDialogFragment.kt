@@ -4,7 +4,9 @@ import android.app.Dialog
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
@@ -26,10 +28,18 @@ abstract class BaseMvvMDialogFragment<V : ViewDataBinding, VM : BaseDialogViewMo
 
     private val handler = Handler()
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val content = LinearLayout(context)
+        inflater.inflate(getLayoutId(inflater,savedInstanceState), content, true)
+        return content
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = Dialog(context!!, R.style.BaseDialogTheme)
-        dialog.setContentView(getLayoutId(LayoutInflater.from(context!!), savedInstanceState))
-        return dialog
+        return  Dialog(context!!, R.style.BaseDialogTheme)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -99,9 +109,7 @@ abstract class BaseMvvMDialogFragment<V : ViewDataBinding, VM : BaseDialogViewMo
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): T {
-        val decorView = dialog?.window?.decorView as ViewGroup
-        val contentView = decorView.findViewById(android.R.id.content) as ViewGroup
-        return DataBindingUtil.bind(contentView.getChildAt(0))!!
+        return DataBindingUtil.bind((view as ViewGroup).getChildAt(0))!!
     }
 
     /**

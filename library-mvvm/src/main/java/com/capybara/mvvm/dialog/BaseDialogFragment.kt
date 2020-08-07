@@ -18,6 +18,22 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
         initParams()
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val root= super.onCreateView(inflater, container, savedInstanceState)
+        (root as LinearLayout).gravity=getGravity()
+        root.setOnClickListener {
+            if (getOutsideEnable()) {
+                onCanceledListener?.invoke()
+                dismissAllowingStateLoss()
+            }
+        }
+        return root
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         if (!isDimAmountEnable())
@@ -27,33 +43,14 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
             if (getBackEnable() && i == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_DOWN) {
                 onCanceledListener?.invoke()
             }
-            return@setOnKeyListener i == KeyEvent.KEYCODE_BACK
+            return@setOnKeyListener !getBackEnable() && i == KeyEvent.KEYCODE_BACK
         }
         val dialogWindow = dialog.window
-        dialogWindow?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.decorView?.setPadding(0, 0, 0, 0)
         dialogWindow?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT
         )
-        (dialogWindow?.decorView as ViewGroup).getChildAt(0).setOnClickListener {
-            if (getOutsideEnable()) {
-                onCanceledListener?.invoke()
-                dismissAllowingStateLoss()
-            }
-        }
-        getRootView(dialog.window?.decorView as ViewGroup).let {
-            it.isClickable = true
-            val layoutParams = (it.parent as ViewGroup).layoutParams
-            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            (it.parent as ViewGroup).layoutParams = layoutParams
-            ((it.parent as ViewGroup).parent as LinearLayout).gravity = getGravity()
-            ((it.parent as ViewGroup).parent as View).setOnClickListener {
-                if (getOutsideEnable()) {
-                    onCanceledListener?.invoke()
-                    dismissAllowingStateLoss()
-                }
-            }
-        }
         return dialog
     }
 
