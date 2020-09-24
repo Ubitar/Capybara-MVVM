@@ -9,7 +9,7 @@ interface IViewModel<M:IModel> {
     fun injectLifecycleOwner(lifecycle: LifecycleOwner)
 
     /** 初始化事件 */
-    fun initEvent()
+    fun initEvent(lifecycle: LifecycleOwner)
 
     /** 初始化数据  */
     fun initData()

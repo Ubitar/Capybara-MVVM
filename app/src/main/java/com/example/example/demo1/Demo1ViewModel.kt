@@ -2,6 +2,7 @@ package com.example.example.demo1
 
 import android.app.Application
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.capybara.mvvm.action.ActivityActions
 import com.capybara.mvvm.model.BaseModel
@@ -18,8 +19,8 @@ class Demo1ViewModel(application: Application) : BaseActivityViewModel<BaseModel
     override fun onCreateActions(): ActivityActions? =null
 
     //用于初始化RecyclerView adapter的事件监听
-    override fun initEvent() {
-        super.initEvent()
+    override fun initEvent(lifecycle: LifecycleOwner) {
+        super.initEvent(lifecycle)
     }
 
     //初始化数据或者获取数据

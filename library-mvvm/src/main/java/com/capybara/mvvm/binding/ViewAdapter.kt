@@ -4,6 +4,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.View.OnTouchListener
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.databinding.BindingAdapter
 import java.util.concurrent.TimeUnit
 
@@ -38,9 +40,9 @@ object ViewAdapter {
 
     @JvmStatic
     @BindingAdapter("onTouch")
-    fun onTouch(view: View, listener: OnTouchListener) {
+    fun onTouch(view: View, listener: OnTouchListener?) {
         view.setOnTouchListener { v: View?, event: MotionEvent? ->
-            listener.onTouch(v, event)
+            listener?.onTouch(v, event) ?: false
         }
     }
 
@@ -56,8 +58,44 @@ object ViewAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("setSelected")
+    fun setSelected(view: View, isSelected: Boolean) {
+        view.isSelected = isSelected
+    }
+
+    @JvmStatic
     @BindingAdapter("setActivated")
     fun setActivated(view: View, isActivated: Boolean) {
         view.isActivated = isActivated
+    }
+
+    @JvmStatic
+    @BindingAdapter("setEnabled")
+    fun setEnabled(view: View, isEnabled: Boolean) {
+        view.isEnabled = isEnabled
+    }
+
+    @JvmStatic
+    @BindingAdapter("setWeight")
+    fun setWeight(view: View, weight: Float) {
+        val layoutParams = (view.layoutParams as LinearLayout.LayoutParams)
+        layoutParams.weight = weight
+        view.layoutParams = layoutParams
+    }
+
+    @JvmStatic
+    @BindingAdapter("layout_height")
+    fun layout_height(view: View, height: Int) {
+        val layoutParams = (view.layoutParams as ViewGroup.LayoutParams)
+        layoutParams.height = height
+        view.layoutParams = layoutParams
+    }
+
+    @JvmStatic
+    @BindingAdapter("layout_width")
+    fun layout_width(view: View, width: Int) {
+        val layoutParams = (view.layoutParams as ViewGroup.LayoutParams)
+        layoutParams.width = width
+        view.layoutParams = layoutParams
     }
 }

@@ -68,7 +68,7 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
         super.onActivityCreated(savedInstanceState)
         initViewModelParams()
         initView()
-        viewModel.initEvent()
+        viewModel.initEvent(this)
         viewModel.initData()
     }
 

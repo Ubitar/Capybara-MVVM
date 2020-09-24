@@ -25,7 +25,7 @@ abstract class BaseViewModel<M : BaseModel>(application: Application) :
     }
 
     /** 初始化事件 */
-    override fun initEvent() {
+    override fun initEvent(lifecycle: LifecycleOwner) {
 
     }
 

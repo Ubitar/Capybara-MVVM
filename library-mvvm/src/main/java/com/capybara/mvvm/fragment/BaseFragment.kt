@@ -47,7 +47,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> 
         super.onActivityCreated(savedInstanceState)
         initViewModelParams()
         initView()
-        viewModel.initEvent()
     }
 
     override fun onSupportVisible() {
@@ -71,6 +70,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> 
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
+        viewModel.initEvent(this)
         if (!isInitDataAfterAnimation()) {
             viewModel.initData()
             isFirstVisible = false

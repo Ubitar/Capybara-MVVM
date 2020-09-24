@@ -18,7 +18,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseActivityViewModel<*>> 
         initParams()
         initViewModelParams()
         initView()
-        viewModel.initEvent()
+        viewModel.initEvent(this)
         viewModel.initData()
     }
 
