@@ -31,6 +31,9 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseDialogViewModel<
                 dismissAllowingStateLoss()
             }
         }
+        root.getChildAt(0).setOnClickListener {
+            //NOTHING
+        }
         return root
     }
 
