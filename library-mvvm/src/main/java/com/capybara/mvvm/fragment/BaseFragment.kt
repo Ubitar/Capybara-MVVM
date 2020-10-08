@@ -16,8 +16,6 @@ import com.capybara.mvvm.vm.base.BaseFragmentViewModel
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> :
     BaseMvvMFragment<V, VM>() {
 
-    private val postRefreshEvent = LinkedHashMap<Int,Any?>(10)
-
     protected var isFirstVisible = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,9 +49,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> 
 
     override fun onSupportVisible() {
         super.onSupportVisible()
-        if (!isFirstVisible)
-            for (event in postRefreshEvent) onRefresh(event.key,event.value)
-        postRefreshEvent.clear()
     }
 
     override fun onSupportInvisible() {
@@ -76,19 +71,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<*>> 
             isFirstVisible = false
         }
     }
-
-    /**
-     * 在fragment有空(出现在用户面前)的时候再刷新
-     */
-    fun postRefresh(type:Int,data:Any?=null) {
-        if (isSupportVisible) onRefresh(type,data)
-        else postRefreshEvent[type]=data
-    }
-
-    /**
-     * 立即刷新 ，推荐使用PostRefresh
-     */
-    open fun onRefresh(type:Int, data:Any?) {}
 
     /** 是否再加载完动画后才开始加载数据，这样是为了防止卡顿 ，默认：加载动画的同时调用 initData() */
     open fun isInitDataAfterAnimation(): Boolean {

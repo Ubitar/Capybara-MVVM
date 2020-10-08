@@ -10,7 +10,6 @@ import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseActivityViewModel<*>> :
     BaseMvvMActivity<V, VM>() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ActivityManager.getManager().addActivity(this)
