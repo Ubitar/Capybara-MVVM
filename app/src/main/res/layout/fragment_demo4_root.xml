@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.example.demo4.vm.Demo4RootViewModel" />
+            type="com.ubitar.example.demo4.vm.Demo4RootViewModel" />
     </data>
 
     <LinearLayout

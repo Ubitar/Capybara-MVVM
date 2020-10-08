@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.example">
+    package="com.ubitar.example">
 
     <application
         android:allowBackup="true"
@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.example.MainActivity">
+        <activity android:name="com.ubitar.example.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.example.demo1.Demo1Activity" />
-        <activity android:name="com.example.example.demo2.Demo2Activity" />
-        <activity android:name="com.example.example.demo3.Demo3Activity" />
-        <activity android:name="com.example.example.demo4.Demo4Activity" />
+        <activity android:name="com.ubitar.example.demo1.Demo1Activity" />
+        <activity android:name="com.ubitar.example.demo2.Demo2Activity" />
+        <activity android:name="com.ubitar.example.demo3.Demo3Activity" />
+        <activity android:name="com.ubitar.example.demo4.Demo4Activity" />
     </application>
 
 </manifest>

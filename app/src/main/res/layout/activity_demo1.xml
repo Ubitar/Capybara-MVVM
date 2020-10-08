@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModelName"
-            type="com.example.example.demo1.Demo1ViewModel" />
+            type="com.ubitar.example.demo1.Demo1ViewModel" />
     </data>
 
     <LinearLayout
