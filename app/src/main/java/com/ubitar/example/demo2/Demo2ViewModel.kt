@@ -3,8 +3,8 @@ package com.ubitar.example.demo2
 import android.app.Application
 import android.text.Editable
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.blankj.utilcode.util.ToastUtils
 import com.ubitar.capybara.mvvm.action.ActivityActions
 import com.ubitar.capybara.mvvm.model.BaseModel
 import com.ubitar.capybara.mvvm.vm.base.BaseActivityViewModel
@@ -41,7 +41,7 @@ class Demo2ViewModel(application: Application) : BaseActivityViewModel<BaseModel
     }
 
     fun onClickBtn4(view: View) {
-        ToastUtils.showShort(edtContent1.value)
+        Toast.makeText(getApplication(),edtContent1.value, Toast.LENGTH_SHORT).show()
     }
 
     fun onClickBtn5(view: View) {

@@ -2,8 +2,8 @@ package com.ubitar.example.demo2
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.blankj.utilcode.util.ToastUtils
 import com.ubitar.capybara.mvvm.activity.BaseActivity
 import com.ubitar.example.BR
 import com.ubitar.example.R
@@ -28,7 +28,7 @@ class Demo2Activity: BaseActivity<ActivityDemo2Binding, Demo2ViewModel>() {
     override fun onBindObservable() {
         super.onBindObservable()
         viewModel.actions.customAction.observe(this, Observer {
-            ToastUtils.showShort("Activity收到了来自ViewModel的信息 $it")
+            Toast.makeText(this,"Activity收到了来自ViewModel的信息 $it",Toast.LENGTH_SHORT).show()
         })
     }
 }

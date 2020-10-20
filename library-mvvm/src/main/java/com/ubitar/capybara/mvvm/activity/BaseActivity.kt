@@ -2,7 +2,6 @@ package com.ubitar.capybara.mvvm.activity
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
-import com.blankj.utilcode.util.KeyboardUtils
 import com.ubitar.capybara.mvvm.common.ActivityManager
 import com.ubitar.capybara.mvvm.vm.base.BaseActivityViewModel
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator
@@ -33,11 +32,6 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseActivityViewModel<*>> 
     override fun onDestroy() {
         super.onDestroy()
         ActivityManager.getManager().finishActivity(this)
-    }
-
-    override fun finish() {
-        KeyboardUtils.hideSoftInput(this)
-        super.finish()
     }
 
     fun getActivity(): BaseActivity<V, VM> {

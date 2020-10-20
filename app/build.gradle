@@ -40,9 +40,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation dependencies.appcompat
     implementation dependencies.recyclerview
-    implementation dependencies.autodisposeandroid
-    implementation dependencies.autodisposearchcomponents
-    implementation dependencies.blankj_utilcode
     implementation dependencies.fragmentation
     implementation dependencies.fragmentation_swipeback
     implementation dependencies.lifecycle_extensions

@@ -38,7 +38,6 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     implementation dependencies.appcompat
     implementation dependencies.recyclerview
-    implementation dependencies.blankj_utilcode
     implementation dependencies.fragmentation
     implementation dependencies.fragmentation_swipeback
     implementation dependencies.lifecycle_extensions

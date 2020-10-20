@@ -2,8 +2,8 @@ package com.ubitar.example.demo3
 
 import android.app.Application
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.blankj.utilcode.util.ToastUtils
 import com.ubitar.capybara.mvvm.action.ActivityActions
 import com.ubitar.capybara.mvvm.vm.base.BaseActivityViewModel
 
@@ -22,7 +22,7 @@ class Demo3ViewModel(application: Application) : BaseActivityViewModel<Demo3Mode
     }
 
     fun afterLoginSuccess() {
-        ToastUtils.showShort("登陆成功")
+        Toast.makeText(getApplication(),"登陆成功", Toast.LENGTH_SHORT).show()
     }
 
 }
