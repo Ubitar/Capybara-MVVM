@@ -252,7 +252,7 @@ class Demo2Activity: BaseActivity<ActivityDemo2Binding, Demo2ViewModel>() {
 ```
 ![](https://upload-images.jianshu.io/upload_images/15368523-2313e46b3a2693be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 <br/>
-###### 6、关于`fragmentation`在这个架构上的应用可以查看源码[demo4](https://github.com/Ubitar/MVVMCapybara/tree/master/app/src/main/java/com/example/example/demo4)
+###### 6、关于`fragmentation`在这个架构上的应用可以查看源码[demo4](https://github.com/Ubitar/Capybara-MVVM/tree/master/app/src/main/java/com/example/example/demo4)
 
 
 
@@ -263,6 +263,6 @@ class Demo2Activity: BaseActivity<ActivityDemo2Binding, Demo2ViewModel>() {
 这个问题就很刁钻了，MVVM和MVP一个自底向上，一个自顶向下，写法完全相反，而且MVVM并不是android原生就有的，稍微复杂点的逻辑不能写在xml（或者说太多if条件），xml报错的时候也一脸懵逼，只能一个一个注释排查，你想从不是MVVM架构的项目中复制代码？对不起，大部分你都要重写。
 但是好处还是有的，感触最深的还是改了只改变一个变量就显示隐藏了多个View，其次是`@BindingAdapter`对UI操作的封装，其他的还要自己去体会。
 
-[大哥，觉得可以的话Gayhub给个Star吧，他们是有交互效果的啊](https://github.com/Ubitar/MVVMCapybara)
+[大哥，觉得可以的话Gayhub给个Star吧，他们是有交互效果的啊](https://github.com/Ubitar/Capybara-MVVM)
 
 ![知道这是啥不](https://upload-images.jianshu.io/upload_images/15368523-4265dfab708ba32b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
