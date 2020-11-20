@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 import com.ubitar.capybara.mvvm.IView
+import com.ubitar.capybara.mvvm.activity.BaseSupportActivity
 import com.ubitar.capybara.mvvm.vm.base.BaseFragmentViewModel
 import me.yokeyword.fragmentation.ISupportActivity
 import java.lang.reflect.ParameterizedType
@@ -94,13 +95,12 @@ abstract class BaseMvvMFragment<V : ViewDataBinding, VM : BaseFragmentViewModel<
         })
         viewModel.getBaseActions().startAction.observe(viewLifecycleOwner, Observer {
             if (it.launchMode == null) {
-                if (it.fromParentFragment) (parentFragment as BaseSupportFragment).start(it.toFragment)
+                if (it.activityFragmentManager)
+                    (requireActivity() as BaseSupportActivity).start(it.toFragment)
                 else start(it.toFragment)
             } else {
-                if (it.fromParentFragment) (parentFragment as BaseSupportFragment).start(
-                    it.toFragment,
-                    it.launchMode
-                )
+                if (it.activityFragmentManager)
+                    (requireActivity() as BaseSupportActivity).start(it.toFragment, it.launchMode)
                 else start(it.toFragment, it.launchMode)
             }
         })

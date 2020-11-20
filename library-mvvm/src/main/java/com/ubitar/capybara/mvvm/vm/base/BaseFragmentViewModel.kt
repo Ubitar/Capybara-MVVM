@@ -82,8 +82,8 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
         baseActions.startAction.call(FragmentActions.StartAction.Start(toFragment))
     }
 
-    fun start(toFragment: ISupportFragment, fromParentFragment: Boolean) {
-        baseActions.startAction.call(FragmentActions.StartAction.Start(toFragment, fromParentFragment))
+    fun start(toFragment: ISupportFragment, activityFragmentManager: Boolean) {
+        baseActions.startAction.call(FragmentActions.StartAction.Start(toFragment, activityFragmentManager))
     }
 
     /**
@@ -91,13 +91,13 @@ abstract class BaseFragmentViewModel<M : BaseModel>(application: Application) :
      */
     fun start(
         toFragment: ISupportFragment,
-        fromParentFragment: Boolean,
+        activityFragmentManager: Boolean,
         @ISupportFragment.LaunchMode launchMode: Int
     ) {
         baseActions.startAction.call(
             FragmentActions.StartAction.Start(
                 toFragment,
-                fromParentFragment,
+                activityFragmentManager,
                 launchMode
             )
         )

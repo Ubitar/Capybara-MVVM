@@ -45,7 +45,7 @@ class FragmentActions {
 
         data class Start(
             val toFragment: ISupportFragment,
-            val fromParentFragment: Boolean = false,
+            val activityFragmentManager: Boolean = false,
             val launchMode: Int? = null
         )
     }
