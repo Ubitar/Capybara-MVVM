@@ -10,7 +10,8 @@ Capybara 使用`databinding + fragmentation`搭建，仅包含`Activity`及`Frag
 - ###### 前言<br/>
 - ###### 结构简述<br/>
 - ###### 食用方法<br/>
-- ###### 常见问题<br/><br/>
+- ###### 常见问题<br/>
+- ###### 版本更新<br/><br/>
 
 ## 前言
 
@@ -262,6 +263,11 @@ class Demo2Activity: BaseActivity<ActivityDemo2Binding, Demo2ViewModel>() {
 ###### 2、MVVM好用不
 这个问题就很刁钻了，MVVM和MVP一个自底向上，一个自顶向下，写法完全相反，而且MVVM并不是android原生就有的，稍微复杂点的逻辑不能写在xml（或者说太多if条件），xml报错的时候也一脸懵逼，只能一个一个注释排查，你想从不是MVVM架构的项目中复制代码？对不起，大部分你都要重写。
 但是好处还是有的，感触最深的还是改了只改变一个变量就显示隐藏了多个View，其次是`@BindingAdapter`对UI操作的封装，其他的还要自己去体会。
+
+## 版本更新
+`1.2.0` `Fragmentation`库替换成[SFragmentation](https://github.com/weikaiyun/SFragmentation)，仅支持setMaxLifecycle管理模式
+
+<br/><br/>
 
 [大哥，觉得可以的话Gayhub给个Star吧，他们是有交互效果的啊](https://github.com/Ubitar/Capybara-MVVM)
 
